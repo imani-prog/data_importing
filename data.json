@@ -1,0 +1,6 @@
+[
+    {"id": 1, "name": "John", "age": 25, "city": "Nairobi"},
+    {"id": 2, "name": "Jane", "age": 28, "city": "Mombasa"},
+    {"id": 3, "name": "Paul", "age": 30, "city": "Kisumu"},
+    {"id": 4, "name": "Mary", "age": 22, "city": "Nakuru"}
+]
