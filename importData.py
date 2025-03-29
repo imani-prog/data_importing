@@ -1,23 +1,23 @@
 import pandas as pd
 
-# Import Excel file
+# Importing Excel file
 excel_df = pd.read_excel("Expenses.xlsx")
 print("Excel Data:\n", excel_df.head())
 
-# Import CSV file
+# Importing CSV file
 csv_df = pd.read_csv("Data.csv")
 print("\nCSV Data:\n", csv_df.head())
 
-# Import JSON file
+# Importing JSON file
 json_df = pd.read_json("data.json")
 print("\nJSON Data:\n", json_df.head())
 
-# Check for missing values
+# Checking  missing values
 print("\nMissing Values in Excel Data:\n", excel_df.isnull().sum())
 print("\nMissing Values in CSV Data:\n", csv_df.isnull().sum())
 print("\nMissing Values in JSON Data:\n", json_df.isnull().sum())
 
-# Check for duplicates
+# Check  duplicates
 print("\nDuplicate Rows in Excel Data:", excel_df.duplicated().sum())
 print("Duplicate Rows in CSV Data:", csv_df.duplicated().sum())
 print("Duplicate Rows in JSON Data:", json_df.duplicated().sum())
@@ -40,7 +40,7 @@ excel_df.drop_duplicates(inplace=True)
 csv_df.drop_duplicates(inplace=True)
 json_df.drop_duplicates(inplace=True)
 
-# ---- Step 10: Data Transformation & Analysis ----
+# ----Data Transformation & Analysis ----
 
 # Filtering Data (Example: Select people older than 25)
 filtered_csv = csv_df[csv_df["age"] > 25]
@@ -66,7 +66,7 @@ sorted_excel.to_excel("sorted_expenses.xlsx", index=False)
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# ---- Step 12: Data Visualization ----
+# ----Data Visualization ----
 
 # Set style for Seaborn
 sns.set(style="whitegrid")
@@ -114,7 +114,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl.chart import BarChart, Reference
 
-# ---- Step 14: Generate an Improved Report ----
+# ----Generate an Improved Report ----
 
 # Load data
 df = pd.read_excel("processed_expenses.xlsx")
