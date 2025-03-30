@@ -13,48 +13,60 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Apply Theme Based on User Selection
-st.sidebar.markdown("### Appearance Settings")
+# Sidebar Theme Toggle
+st.sidebar.markdown("### ⚙️ Appearance Settings")
 mode = st.sidebar.radio("Select Theme:", ["Light Mode", "Dark Mode"], horizontal=True)
 
-# Custom CSS for Dark and Light Mode
+# Define Color Themes
 if mode == "Dark Mode":
-    dark_mode_style = """
-        <style>
-            body { background-color: #181818; color: #ffffff; }
-            .stApp { background-color: #181818; color: #ffffff; }
-            .sidebar .sidebar-content { background-color: #222222; color: #ffffff; }
-            .stDataFrame { color: #ffffff !important; }
-        </style>
-    """
-    st.markdown(dark_mode_style, unsafe_allow_html=True)
+    primary_bg = "#181818"
+    secondary_bg = "#222222"
+    text_color = "#ffffff"
+    plotly_theme = "plotly_dark"
 else:
-    light_mode_style = """
-        <style>
-            body { background-color: #ffffff; color: #000000; }
-            .stApp { background-color: #ffffff; color: #000000; }
-        </style>
-    """
-    st.markdown(light_mode_style, unsafe_allow_html=True)
+    primary_bg = "#ffffff"
+    secondary_bg = "#f8f9fa"
+    text_color = "#000000"
+    plotly_theme = "plotly"
+
+# Apply Custom CSS for Light & Dark Mode
+custom_css = f"""
+    <style>
+        body, .stApp {{
+            background-color: {primary_bg};
+            color: {text_color};
+        }}
+        .sidebar .sidebar-content {{
+            background-color: {secondary_bg};
+            color: {text_color};
+        }}
+        .stDataFrame, .dataframe {{
+            color: {text_color} !important;
+        }}
+    </style>
+"""
+st.markdown(custom_css, unsafe_allow_html=True)
 
 # Dashboard Title
 st.title("📊 Expense Report Dashboard")
 st.write("Analyze and track your expenses efficiently")
 
 # Summary Statistics
-st.subheader("Summary Statistics")
+st.subheader("📌 Summary Statistics")
 st.write(df.describe())
 
-# Expense Breakdown - Interactive Bar Chart
-st.subheader("Expense Breakdown")
-fig = px.bar(df[:10], x="Expenses", y="Item Cost", color="Item Cost", title="Top 10 Expenses")
+# Expense Breakdown - Interactive Bar Chart (Plotly)
+st.subheader("💰 Expense Breakdown")
+fig = px.bar(df[:10], x="Expenses", y="Item Cost", color="Item Cost",
+             title="Top 10 Expenses", template=plotly_theme)
 st.plotly_chart(fig, use_container_width=True)
 
-# Expense Distribution - Histogram
-st.subheader("Expense Distribution")
-fig2 = px.histogram(df, x="Item Cost", nbins=20, title="Distribution of Expenses", color_discrete_sequence=['blue'])
+# Expense Distribution - Histogram (Plotly)
+st.subheader("📉 Expense Distribution")
+fig2 = px.histogram(df, x="Item Cost", nbins=20, title="Distribution of Expenses",
+                    color_discrete_sequence=['blue'], template=plotly_theme)
 st.plotly_chart(fig2, use_container_width=True)
 
-# Show Data Table
-st.subheader("Full Data")
-st.dataframe(df, use_container_width=True)
+# Show Data Table (Styled)
+st.subheader("📜 Full Data")
+st.dataframe(df.style.set_properties(**{'background-color': primary_bg, 'color': text_color}), use_container_width=True)
