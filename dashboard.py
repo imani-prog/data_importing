@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import plotly.express as px
 
 # Load Data
@@ -14,31 +13,33 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for Light/Dark Mode Toggle
-st.markdown(
-    """
-    <style>
-        body { font-family: 'Arial', sans-serif; }
-        .title { text-align: center; font-size: 36px; font-weight: bold; }
-        .subtitle { text-align: center; font-size: 20px; color: #888; }
-        .stApp { background-color: var(--background-color); color: var(--text-color); }
-        .light { --background-color: #ffffff; --text-color: #000000; }
-        .dark { --background-color: #181818; --text-color: #ffffff; }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# Apply Theme Based on User Selection
+st.sidebar.markdown("### Appearance Settings")
+mode = st.sidebar.radio("Select Theme:", ["Light Mode", "Dark Mode"], horizontal=True)
 
-# Light/Dark Mode Toggle
-mode = st.sidebar.radio("Select Theme:", ["Light Mode", "Dark Mode"])
+# Custom CSS for Dark and Light Mode
 if mode == "Dark Mode":
-    st.markdown('<body class="dark">', unsafe_allow_html=True)
+    dark_mode_style = """
+        <style>
+            body { background-color: #181818; color: #ffffff; }
+            .stApp { background-color: #181818; color: #ffffff; }
+            .sidebar .sidebar-content { background-color: #222222; color: #ffffff; }
+            .stDataFrame { color: #ffffff !important; }
+        </style>
+    """
+    st.markdown(dark_mode_style, unsafe_allow_html=True)
 else:
-    st.markdown('<body class="light">', unsafe_allow_html=True)
+    light_mode_style = """
+        <style>
+            body { background-color: #ffffff; color: #000000; }
+            .stApp { background-color: #ffffff; color: #000000; }
+        </style>
+    """
+    st.markdown(light_mode_style, unsafe_allow_html=True)
 
-# Title
-st.markdown('<p class="title">📊 Expense Report Dashboard</p>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">Analyze and track your expenses efficiently</p>', unsafe_allow_html=True)
+# Dashboard Title
+st.title("📊 Expense Report Dashboard")
+st.write("Analyze and track your expenses efficiently")
 
 # Summary Statistics
 st.subheader("Summary Statistics")
