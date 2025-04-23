@@ -1,4 +1,4 @@
-"# Data Importi
+"# Data
 # Data Importing Project
 
 This project is designed for importing and processing data using Python. It includes:
