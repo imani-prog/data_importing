@@ -8,7 +8,7 @@ df = pd.read_excel("Improved_Expenses_Report.xlsx")
 # Set Page Configuration
 st.set_page_config(
     page_title="Expense Report Dashboard",
-    page_icon="📊",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
 )
